@@ -51,6 +51,12 @@ class Scenario:
             self.graph.graph[person0][person1]["sentiment"] = 0
         self.graph.graph[person0][person1]["sentiment"] += value
 
+    def get_sentiment(self, person0, person1):
+        g = self.graph.graph
+        if person0 not in g or person1 not in g[person0] or "sentiment" not in g[person0][person1]:
+            return 0
+        return self.graph.graph[person0][person1]["sentiment"]
+
     def set_location(self, person, location):
         person.location = location
 

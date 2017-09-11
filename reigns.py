@@ -10,9 +10,9 @@ def main():
     scenario = ReignsScenario()
     print(scenario.name)
 
-    king = scenario.graph.graph.nodes()[0]
+    [king] = [p for p in scenario.graph.graph.nodes() if 'King' in p.name]
 
-    for timestep in range(2):
+    for timestep in range(4):
         scenario.graph.timestep = timestep
 
         all_valid_events = scenario.get_all_valid_events()

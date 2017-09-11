@@ -1,4 +1,6 @@
 
+import sys
+
 class Event:
     def __init__(self, name="event", text="event text", persons=1,conditions=[], effects=[], choices=[], choices_result_text=[], choices_effects=[]):
         self.name = name
@@ -46,6 +48,27 @@ class Event:
         assert choice >=0 and choice <= len(self.choices)
         for choices_effect in self.choices_effects[choice]:
             choices_effect(self.graph, self.target_persons)
+
+    def get_choice(self):
+        print(self.text + "\n")
+
+        # Indexing is 1-based
+        for i, choice in enumerate(self.choices):
+            print("{}. {}".format(i + 1, choice))
+
+        while True:
+            sys.stdout.write('>> ')
+            sys.stdout.flush()
+            try:
+                choice = int(raw_input()) - 1
+                if choice >=0 and choice < len(self.choices):
+                    break
+            except ValueError as e:
+                continue
+
+        print(self.choices_result_text[choice])
+
+        return choice
 
     def get_text(self, selected_choice=-1):
         text = self.text + "\n"

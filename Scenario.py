@@ -1,6 +1,6 @@
-from Event import Event
-from SocialGraph import SocialGraph, Person
+
 from itertools import permutations
+
 
 class Scenario:
     def __init__(self, name="untitled scenario"):
@@ -15,8 +15,8 @@ class Scenario:
     def get_valid_persons(self, event, fixed_persons=None):
         persons = self.graph.graph.nodes()
         valid = permutations(persons, event.persons)
-        if fixed_persons != None:
-            valid = [x for x in valid if False not in [fixed_persons[i] == None or p == fixed_persons[i] for i,p in enumerate(x)]]
+        if fixed_persons is not None:
+            valid = [x for x in valid if False not in [fixed_persons[i] is None or p == fixed_persons[i] for i,p in enumerate(x)]]
         valid = [x for x in valid if event.conditions_check(self.graph, x)]
         return valid
 
@@ -29,14 +29,14 @@ class Scenario:
         return valid
 
     def get_valid_events_per_person(self, all_valid_events=None):
-        if all_valid_events == None:
+        if all_valid_events is None:
             all_valid_events = get_all_valid_events(self.graph)
         valid_events_per_person = {}
         for [event, persons] in all_valid_events:
             p = None
             if len(persons) > 0:
                 p = persons[0]
-            if valid_events_per_person.get(p) == None:
+            if valid_events_per_person.get(p) is None:
                 valid_events_per_person[p] = []
             valid_events_per_person[p].append([event, persons])
         return valid_events_per_person

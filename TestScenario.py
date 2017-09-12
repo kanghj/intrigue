@@ -1,7 +1,7 @@
 from Event import Event
 from SocialGraph import SocialGraph, Person
-from itertools import permutations
 from Scenario import Scenario
+
 
 class TestScenario(Scenario):
 

@@ -32,20 +32,20 @@ class Event:
     def conditions_check(self, graph, persons):
         assert(len(persons) == self.persons)
         for condition in self.conditions:
-            if condition(graph, persons) == False: 
+            if not condition(graph, persons):
                 return False
         return True
 
     def apply_effects(self):
-        assert self.graph != None and self.target_persons != None
+        assert self.graph is not None and self.target_persons is not None
         for effect in self.effects:
             effect(self.graph, self.target_persons)
 
     def apply_choice_effects(self, choice):
         if choice == -1:
             return
-        assert self.graph != None and self.target_persons != None
-        assert choice >=0 and choice <= len(self.choices)
+        assert self.graph is not None and self.target_persons is not None
+        assert 0 <= choice <= len(self.choices)
         for choices_effect in self.choices_effects[choice]:
             choices_effect(self.graph, self.target_persons)
 
@@ -61,7 +61,7 @@ class Event:
             sys.stdout.flush()
             try:
                 choice = int(raw_input()) - 1
-                if choice >=0 and choice < len(self.choices):
+                if 0 <= choice < len(self.choices):
                     break
             except ValueError as e:
                 continue
@@ -79,7 +79,7 @@ class Event:
                 text += "{}. {}\n".format(i, choice)
 
         if selected_choice != -1:
-            assert selected_choice >=0 and selected_choice <= len(self.choices)
+            assert 0 <= selected_choice <= len(self.choices)
             text += ">> {}\n".format(self.choices_result_text[selected_choice])
 
         return text

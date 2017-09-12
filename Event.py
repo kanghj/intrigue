@@ -1,6 +1,10 @@
 
 import sys
 
+# Fix Python 2.x.
+try: input = raw_input
+except NameError: pass
+
 class Event:
     def __init__(self, name="event", text="event text", persons=1,conditions=[], effects=[], choices=[], choices_result_text=[], choices_effects=[]):
         self.name = name
@@ -60,7 +64,7 @@ class Event:
             sys.stdout.write('>> ')
             sys.stdout.flush()
             try:
-                choice = int(raw_input()) - 1
+                choice = int(input()) - 1
                 if 0 <= choice < len(self.choices):
                     break
             except ValueError as e:

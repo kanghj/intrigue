@@ -1,12 +1,11 @@
-
 from Event import Event
 from SocialGraph import SocialGraph, Person
-from itertools import permutations
 from Scenario import Scenario
 
 king = Person(name="King Edward")
 jester = Person(name="Junius Loosetongue")
 scientist = Person(name="Master Avenzoar")
+
 
 class ReignsScenario(Scenario):
 
@@ -37,25 +36,25 @@ class ReignsScenario(Scenario):
             return lambda graph, persons: l(self.get_sentiment(persons[0], persons[1]))
 
         return [
-            Event(name='Anachy 1',
-                    text='All is anarchy. Do you still believe science can save us?',
-                    persons=2,
-                    conditions=[
+            Event(name='Anarchy 1',
+                  text='All is anarchy. Do you still believe science can save us?',
+                  persons=2,
+                  conditions=[
                         speaking_to(jester),
                         sentiment_is(lambda s: s < 1)
-                    ],
-                    effects=[
+                  ],
+                  effects=[
                         record_interaction
-                    ],
-                    choices=[
+                  ],
+                  choices=[
                       'Yes',
                       'No'
-                    ],
-                    choices_result_text=[
+                  ],
+                  choices_result_text=[
                       '',
                       "You're not sure if anyone overheard."
-                    ],
-                    choices_effects=[
+                  ],
+                  choices_effects=[
                         [
                             change_sentiment(-1)
                         ],
@@ -64,32 +63,32 @@ class ReignsScenario(Scenario):
                             # outside those involved here
                             change_sentiment(1)
                         ]
-                    ]
-                ),
+                  ]
+            ),
             Event(name='Anachy 2',
-                    text='Wonderful!',
-                    persons=2,
-                    conditions=[
+                  text='Wonderful!',
+                  persons=2,
+                  conditions=[
                         # TODO some state which prevents this from firing more than once?
                         speaking_to(jester),
                         sentiment_is(lambda s: s >= 1)
-                    ],
-                    effects=[
+                  ],
+                  effects=[
                         record_interaction
-                    ],
-                    choices=[
+                  ],
+                  choices=[
                       "The world isn't getting warmer, not at all!",
                       'We are in total agreement.'
-                    ],
-                    choices_result_text=[
+                  ],
+                  choices_result_text=[
                       '',
                       ''
-                    ],
-                    choices_effects=[
+                  ],
+                  choices_effects=[
                         [
                         ],
                         [
                         ]
-                    ]
-                )
+                  ]
+            )
         ]

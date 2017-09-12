@@ -1,10 +1,9 @@
-from Event import Event
 from TestScenario import TestScenario
 
-import json
 import random
 
 random.seed(1234567890)
+
 
 def main():
     scenario = TestScenario()
@@ -12,7 +11,6 @@ def main():
 
     for timestep in range(15):
         scenario.graph.timestep = timestep
-
 
         all_valid_events = scenario.get_all_valid_events()
         valid_events_per_person = scenario.get_valid_events_per_person(all_valid_events)
@@ -39,8 +37,6 @@ def main():
             # Apply picked choice effects
             event.apply_choice_effects(choice)
 
-
-
         print("=========={}==========".format(timestep))
         print(scenario.graph)
         print("=========={}==========".format(timestep))
@@ -62,8 +58,6 @@ def loop():
 
         # IDEA: fixed events every timestep
         # IDEA: immediate events - trigger once conditions are fufilled
-
-
 
 
 if __name__ == '__main__':

@@ -1,10 +1,8 @@
-from Event import Event
 from ReignsScenario import ReignsScenario
-
-import json
 import random
 
 random.seed(1234567890)
+
 
 def main():
     scenario = ReignsScenario()
@@ -33,6 +31,7 @@ def main():
         print("=========={}==========".format(timestep))
 
     print('done')
+
 
 if __name__ == '__main__':
     main()
